@@ -15,16 +15,20 @@ export type MainStackParamList = {
 }
 
 export type BottomTabParamList = {
-  Home: NO_PARAMS
+  Calculate: NO_PARAMS
   Stats: NO_PARAMS
   Settings: NO_PARAMS
+  Tips: NO_PARAMS
 }
 
-export type HomeParamList = {
-  HomeScreen: NO_PARAMS
+export type CalculateParamList = {
+  CalculateScreen: NO_PARAMS
   PlayScreen: {
     id: string
   }
+}
+export type CalculateFinanceParamList = {
+  CalculateFinanceScreen: NO_PARAMS
 }
 
 export type StatsParamList = {
@@ -34,4 +38,8 @@ export type StatsParamList = {
 export type SettingsParamList = {
   SettingsScreen: NO_PARAMS
   AboutScreen: NO_PARAMS
+}
+
+export type TipsParamList = {
+  TipsScreen: NO_PARAMS
 }

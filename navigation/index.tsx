@@ -9,6 +9,7 @@ import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
 
 import NotFoundScreen from '../screens/NotFoundScreen'
+// import LoginScreen from '../screens/Login'
 import { RootStackParamList } from '../types'
 import MainNavigator from './MainNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
@@ -60,6 +61,7 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={MainNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      {/* <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} /> */}
     </Stack.Navigator>
   )
 }
