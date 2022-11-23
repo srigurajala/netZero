@@ -6,12 +6,12 @@ import { StyleSheet } from 'react-native'
 
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
-import HomeScreen from '../screens/Home'
-import PlayScreen from '../screens/Play'
+import CalculateScreen from '../screens/Calculate'
 import SettingsScreen from '../screens/Settings'
-import StatsScreen from '../screens/Stats'
-import AboutPage from '../screens/Settings/About'
-import { BottomTabParamList, HomeParamList, SettingsParamList, StatsParamList } from '../types'
+import TrackScreen from '../screens/Track'
+import CalculateFinanceScreen from '../screens/CalculateFinance'
+import TipsScreen from '../screens/Tips'
+import { BottomTabParamList, CalculateParamList, SettingsParamList, TipsParamList } from '../types'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
@@ -24,24 +24,31 @@ export default function BottomTabNavigator() {
       screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint, headerShown: false }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="Calculate"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="calculator" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="Stats"
+        name="Track"
         component={StatsNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="Settings"
+        name="Tips"
+        component={TipsNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="info" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Pledge"
         component={SettingsNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="setting" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="checkcircle" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -56,53 +63,71 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Icon>['name']; co
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const HomeStack = createStackNavigator<HomeParamList>()
+const CalculateStack = createStackNavigator<CalculateParamList>()
 
 function TabOneNavigator() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Group
+    <CalculateStack.Navigator>
+      <CalculateStack.Group
         screenOptions={{
           headerStyle: styles.header,
           headerTitleStyle: styles.headerTitle,
           headerTintColor: Colors.light.white,
         }}
       >
-        <HomeStack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+        <CalculateStack.Screen
+          name="CalculateScreen"
+          component={CalculateScreen}
           options={{
-            headerTitle: 'Home',
+            headerTitle: 'Calculate',
           }}
         />
-        <HomeStack.Screen
-          name="PlayScreen"
-          component={PlayScreen}
+        <CalculateStack.Screen
+          name="CalculateFinanceScreen"
+          component={CalculateFinanceScreen}
           options={{
             headerBackTitle: 'Back',
-            headerTitle: 'Play',
+            headerTitle: 'Calculate',
           }}
         />
-      </HomeStack.Group>
-    </HomeStack.Navigator>
+      </CalculateStack.Group>
+    </CalculateStack.Navigator>
   )
 }
 
-const StatsStack = createStackNavigator<StatsParamList>()
+const TrackStack = createStackNavigator<TrackParamList>()
 
 function StatsNavigator() {
   return (
-    <StatsStack.Navigator>
-      <StatsStack.Screen
-        name="StatsScreen"
-        component={StatsScreen}
+    <TrackStack.Navigator>
+      <TrackStack.Screen
+        name="TrackScreen"
+        component={TrackScreen}
         options={{
-          headerTitle: 'Stats',
+          headerTitle: 'Track',
           headerStyle: styles.header,
           headerTitleStyle: styles.headerTitle,
         }}
       />
-    </StatsStack.Navigator>
+    </TrackStack.Navigator>
+  )
+}
+
+const TipsStack = createStackNavigator<TipsParamList>()
+
+function TipsNavigator() {
+  return (
+    <TipsStack.Navigator>
+      <TipsStack.Screen
+        name="TipsScreen"
+        component={TipsScreen}
+        options={{
+          headerTitle: 'Tips',
+          headerStyle: styles.header,
+          headerTitleStyle: styles.headerTitle,
+        }}
+      />
+    </TipsStack.Navigator>
   )
 }
 
@@ -135,6 +160,23 @@ function SettingsNavigator() {
     </SettingsStack.Navigator>
   )
 }
+
+// function CalculateFinanceNavigator() {
+//   return (
+//     <CalculateFinanceStack.Navigator>
+//       <CalculateFinanceStack.Screen
+//         name="SettingsScreen"
+//         component={SettingsScreen}
+//         options={{
+//           headerTitle: 'Calculate',
+//           headerStyle: styles.header,
+//           headerTitleStyle: styles.headerTitle,
+//         }}
+//       />
+      
+//     </CalculateFinanceStack.Navigator>
+//   )
+// }
 
 const styles = StyleSheet.create({
   headerTitle: {
