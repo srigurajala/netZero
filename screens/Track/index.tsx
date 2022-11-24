@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Dimensions, View } from 'react-native'
 import { Card } from 'react-native-paper'
 import {
@@ -29,10 +29,18 @@ const chartConfig = {
 
 export default function StatsScreen({ navigation }: Props) {
   const textColor = useThemeColor({}, 'text')
+  const [results, setResults] = useState<Array>([]);
 
   const getTrackHistory = () => {
     axios.get("https://spft02h3ui.execute-api.ap-southeast-2.amazonaws.com/emissions")
-            .then(response => console.log('data1', response.data.Items));
+            .then(response => response.data.Items)
+            .then(data => {
+              data.forEach(element => {
+                setResults(prevState => [...prevState, element.emissions]);
+              });
+              cosole.log('emissions', results)
+            })
+            .catch(error => console.log(error));
   }
   useEffect(() => {
     getTrackHistory()
@@ -49,7 +57,7 @@ export default function StatsScreen({ navigation }: Props) {
                     labels: ['Travel', 'Personal', 'Food'],
                     datasets: [
                         {
-                        data: [70, 49, 55],
+                        data: results,
                         },
                     ],
                     }}
