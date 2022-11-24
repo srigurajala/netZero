@@ -16,6 +16,7 @@ const About = () => {
   return (
     <>
       <List.Item
+        style={styles.text}
         title="Application Version"
         right={() => (
           <Caption style={styles.caption}>{Application.nativeApplicationVersion}</Caption>
@@ -23,11 +24,12 @@ const About = () => {
       />
       <Divider />
       <List.Item
+        style={styles.text}
         title="Build Version"
         right={() => <Caption style={styles.caption}>{Application.nativeBuildVersion}</Caption>}
       />
       <Divider />
-      <List.Item title="About Us" onPress={openAboutUs} />
+      <List.Item style={styles.text} title="About Us" onPress={openAboutUs} />
       <Divider />
     </>
   )
@@ -37,6 +39,12 @@ const styles = StyleSheet.create({
   caption: {
     marginTop: 5,
   },
+  text: {
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: '500',
+    margin: 0,
+  }
 })
 
 export default About

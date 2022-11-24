@@ -149,19 +149,7 @@ function SettingsNavigator() {
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          headerTitle: 'Settings',
-          headerStyle: styles.header,
-          headerTitleStyle: styles.headerTitle,
-        }}
-      />
-      <SettingsStack.Screen
-        name="AboutScreen"
-        component={AboutPage}
-        options={{
-          headerBackTestID: 'headerBack',
-          headerTintColor: Colors.light.white,
-          headerBackTitle: 'Back',
-          headerTitle: 'About',
+          headerTitle: 'Pledge',
           headerStyle: styles.header,
           headerTitleStyle: styles.headerTitle,
         }}
@@ -169,23 +157,6 @@ function SettingsNavigator() {
     </SettingsStack.Navigator>
   )
 }
-
-// function CalculateFinanceNavigator() {
-//   return (
-//     <CalculateFinanceStack.Navigator>
-//       <CalculateFinanceStack.Screen
-//         name="SettingsScreen"
-//         component={SettingsScreen}
-//         options={{
-//           headerTitle: 'Calculate',
-//           headerStyle: styles.header,
-//           headerTitleStyle: styles.headerTitle,
-//         }}
-//       />
-      
-//     </CalculateFinanceStack.Navigator>
-//   )
-// }
 
 const styles = StyleSheet.create({
   headerTitle: {

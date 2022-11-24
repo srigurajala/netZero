@@ -38,16 +38,16 @@ export default function Calculate({ navigation }: Props) {
     <Screen scroll>
       <Text style={styles.title}>How much do you consume? (in calories)? </Text>
       <Paragraph>Meat, fish, eggs</Paragraph>
-      <Slider style={styles.slider} value={0} onValueChange={clickHandler1} minimumValue={0} maximumValue={5} step={1} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
+      <Slider style={styles.slider} value={0} onValueChange={clickHandler1} minimumValue={0} maximumValue={5} step={1} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="rgb(70, 63, 176)" />
       <Chip style={styles.chip}>{value1} Daily calories per person | Avg 576 cal/person</Chip>
       <Paragraph>Diary</Paragraph>
-      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler2} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
+      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler2} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="rgb(70, 63, 176)" />
       <Chip style={styles.chip}>{value2} Daily calories per person | Avg 671 cal/person</Chip>
       <Paragraph>Grains/Cereals</Paragraph>
-      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler3} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
+      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler3} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="rgb(70, 63, 176)" />
       <Chip style={styles.chip}>{value3} Daily calories per person | Avg 286 cal/person</Chip>
       <Paragraph>Fruits/Vegetables</Paragraph>
-      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler4} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
+      <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler4} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="rgb(70, 63, 176)" />
       <Chip style={styles.chip}>{value4} Daily calories per person | Avg 271 cal/person</Chip>
       <Button mode="contained" onPress={() => navigation.navigate('CalculateFinanceScreen')}>
         Next
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     opacity: 1,
     height: 50,
     marginTop: 10,
+    width: 370
   },
   container: {
     backgroundColor: '#fff',
