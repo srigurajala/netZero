@@ -8,10 +8,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
 
-import NotFoundScreen from '../screens/NotFoundScreen'
 // import LoginScreen from '../screens/Login'
+// import NotFoundScreen from '../screens/NotFoundScreen'
 import { RootStackParamList } from '../types'
-import MainNavigator from './MainNavigator'
+import {MainNavigator} from './MainNavigator'
 import LinkingConfiguration from './LinkingConfiguration'
 import { StatusBar } from 'expo-status-bar'
 import { initializeAnalytics, logEvent } from '../utils/analytics'
@@ -60,8 +60,6 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={MainNavigator} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      {/* <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }} /> */}
     </Stack.Navigator>
   )
 }

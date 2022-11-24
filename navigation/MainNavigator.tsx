@@ -3,17 +3,15 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigator'
 import CompletedScreen from '../screens/Completed'
-// import LoginScreen from '../screens/Login'
 import Colors from '../constants/Colors'
 import { MainStackParamList } from '../types'
 
 const Stack = createStackNavigator<MainStackParamList>()
 
-export default function MainNavigator() {
+export function MainNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Main" component={BottomTabNavigator} />
-      {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
       <Stack.Screen
         name="CompletedScreen"
         component={CompletedScreen}

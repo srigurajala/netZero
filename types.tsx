@@ -7,6 +7,7 @@ export type NO_PARAMS = undefined
 export type RootStackParamList = {
   Root: NO_PARAMS
   NotFound: NO_PARAMS
+  Login: NO_PARAMS
 }
 
 export type MainStackParamList = {
@@ -47,3 +48,11 @@ export type SettingsParamList = {
 export type TipsParamList = {
   TipsScreen: NO_PARAMS
 }
+
+export type NotFoundParamList = {
+  NotFoundScreen: NO_PARAMS
+}
+
+// export type LoginParamList = {
+//   LoginScreen: NO_PARAMS
+// }
