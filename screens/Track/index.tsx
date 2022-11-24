@@ -1,100 +1,130 @@
-import * as React from 'react'
-import { StyleSheet, ScrollView, View } from 'react-native'
-import { Card, Title, Paragraph } from 'react-native-paper'
-import { AntDesign as Icon } from '@expo/vector-icons'
+import { StackNavigationProp } from '@react-navigation/stack'
+import React, {useEffect} from 'react'
+import { StyleSheet, Dimensions, View } from 'react-native'
+import { Card } from 'react-native-paper'
+import {
+    LineChart,
+    BarChart
+  } from "react-native-chart-kit"
+import axios from "axios";
 
-import useColorScheme from '../../hooks/useColorScheme'
-import Calendar from './Calendar'
 import Screen from '../../components/Screen'
-import { useAppSelector, useMinutesToStatsTime, useMsToMinutes, useQuote } from '../../hooks'
-import { selectStreak, selectTotalDuration, selectTotalSessions } from '../../redux/selectors'
-import ManualEntry from './ManualEntry'
-import { useThemeColor } from '../../components'
+import { Text, useThemeColor } from '../../components/Themed'
+import Colors from '../../constants/Colors'
+import { ResultsParamList } from '../../types'
+import { useAppSelector } from '../../hooks'
+import { selectFavourites } from '../../redux/selectors'
 
-export default function StatsScreen() {
-  //Component key will redraw calendars color switch issue.
-  const colorScheme = useColorScheme()
-  const totalSessions = useAppSelector(selectTotalSessions)
-  const totalDuration = useAppSelector(selectTotalDuration)
-  const streak = useAppSelector(selectStreak)
-  const totalMinutes = useMsToMinutes(totalDuration)
-  const listenedStat = useMinutesToStatsTime(totalMinutes)
-  const primary = useThemeColor({}, 'primary')
-  const [manualEntryTimestamp, setManualEntryTimestamp] = React.useState<number>()
-  const { quote, author } = useQuote()
+interface Props {
+  navigation: StackNavigationProp<ResultsParamList, 'ResultsScreen'>
+}
+
+const chartConfig = {
+  fillShadowGradientOpacity: 0.02,
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientToOpacity: 0,
+  color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
+  strokeWidth: 2, 
+};
+
+export default function StatsScreen({ navigation }: Props) {
+  const textColor = useThemeColor({}, 'text')
+
+  const getTrackHistory = () => {
+    axios.get("https://spft02h3ui.execute-api.ap-southeast-2.amazonaws.com/emissions")
+            .then(response => console.log('data1', response.data.Items));
+  }
+  useEffect(() => {
+    getTrackHistory()
+  }, [])
 
   return (
-    <>
-      <Screen scroll>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
-          <Card style={styles.card}>
+    <Screen scroll style={styles.container}>
+        <Card style={styles.performanceCard}>
+            <Card.Title  titleStyle={[styles.cardTitle, { color: textColor }]} title="Household tons CO2/year" />
             <Card.Content style={styles.cardContent}>
-              <Icon name="Trophy" style={styles.icon} size={30} color={primary} />
-              <Paragraph>Current Streak</Paragraph>
-              <Title>
-                {streak} day{streak === 1 ? '' : 's'}
-              </Title>
+            <View style={styles.chartContainer}>
+                <BarChart
+                    data={{
+                    labels: ['Travel', 'Personal', 'Food'],
+                    datasets: [
+                        {
+                        data: [70, 49, 55],
+                        },
+                    ],
+                    }}
+                    width={Dimensions.get('window').width - 80}
+                    height={220}
+                    chartConfig={chartConfig}
+                    style={{
+                    marginVertical: 8,
+                    borderRadius: 16,
+                    }}
+                />
+                </View>
             </Card.Content>
-          </Card>
-          <Card style={styles.card}>
+        </Card>
+        <Card style={styles.performanceCard}>
+            <Card.Title  titleStyle={[styles.cardTitle, { color: textColor }]} title="Overall Performance" />
             <Card.Content style={styles.cardContent}>
-              <Icon name="calendar" style={styles.icon} size={30} color={primary} />
-              <Paragraph>Total Sessions</Paragraph>
-              <Title>
-                {totalSessions} session{totalSessions === 1 ? '' : 's'}
-              </Title>
+              <View style={styles.chartContainer}>
+                <LineChart
+                    data={{
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [
+                        {
+                        data: [20, 45, 28, 80, 99, 43],
+                        strokeWidth: 2,
+                        },
+                    ],
+                    }}
+                    width={Dimensions.get('window').width - 80}
+                    height={220}
+                    chartConfig={chartConfig}
+                    style={{
+                    marginVertical: 8,
+                    borderRadius: 16,
+                    }}
+                />
+              </View>
             </Card.Content>
-          </Card>
-          <Card style={styles.card}>
-            <Card.Content style={styles.cardContent}>
-              <Icon name="clockcircleo" style={styles.icon} size={30} color={primary} />
-              <Paragraph>Rating</Paragraph>
-              <Title>68%</Title>
-            </Card.Content>
-          </Card>
-        </ScrollView>
-        <Calendar key={colorScheme} setManualEntryTimestamp={setManualEntryTimestamp} />
-        <View style={styles.quoteContainer}>
-          <Card style={styles.quoteCard}>
-            <Card.Content style={styles.cardContent}>
-              <Paragraph>{author}</Paragraph>
-              <Title style={styles.quoteTitle}>{quote}</Title>
-            </Card.Content>
-          </Card>
-        </View>
-      </Screen>
-      <View pointerEvents="box-none" style={StyleSheet.absoluteFill}>
-        <ManualEntry
-          timestamp={manualEntryTimestamp}
-          onDismiss={() => setManualEntryTimestamp(undefined)}
-        />
-      </View>
-    </>
+        </Card>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  cards: {
-    marginBottom: 30,
+  container: {
+    flex: 1,
+    padding: 10,
+    color: Colors.tintColor,
+    width: "100%",
   },
-  card: {
-    width: 150,
-    marginRight: 10,
-    textAlign: 'center',
-  },
-  quoteContainer: { marginRight: 10, marginBottom: 30 },
-  quoteCard: {
-    width: '100%',
-  },
-  quoteTitle: {
-    textAlign: 'center',
+  cardTitle: {
+    fontSize: 16,
   },
   cardContent: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
-  icon: {
-    marginBottom: 10,
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 19,
+  },
+  chartContainer: {
+    flex: 1, 
+    paddingTop: 40,
+    paddingBottom: 10,
+    overflow: "visible",
+  },
+  performanceCard: {
+    flex: 1,
+    margin: 10,
+    padding: 5,
+    elevation: 4,
+    borderRadius: 30,
   },
 })
