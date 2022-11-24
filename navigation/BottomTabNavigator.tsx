@@ -10,6 +10,7 @@ import CalculateScreen from '../screens/Calculate'
 import SettingsScreen from '../screens/Settings'
 import TrackScreen from '../screens/Track'
 import CalculateFinanceScreen from '../screens/CalculateFinance'
+import ResultsScreen from '../screens/Results'
 import TipsScreen from '../screens/Tips'
 import { BottomTabParamList, CalculateParamList, SettingsParamList, TipsParamList } from '../types'
 
@@ -85,6 +86,14 @@ function TabOneNavigator() {
         <CalculateStack.Screen
           name="CalculateFinanceScreen"
           component={CalculateFinanceScreen}
+          options={{
+            headerBackTitle: 'Back',
+            headerTitle: 'Calculate',
+          }}
+          />
+        <CalculateStack.Screen
+          name="ResultsScreen"
+          component={ResultsScreen}
           options={{
             headerBackTitle: 'Back',
             headerTitle: 'Calculate',

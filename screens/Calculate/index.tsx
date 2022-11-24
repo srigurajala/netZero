@@ -7,7 +7,6 @@ import Slider from '@react-native-community/slider';
 import Screen from '../../components/Screen'
 import { Text, useThemeColor } from '../../components/Themed'
 import { CalculateParamList } from '../../types'
-import Colors from '../../constants/Colors'
 
 interface Props {
   navigation: StackNavigationProp<CalculateParamList, 'CalculateScreen'>
@@ -40,16 +39,16 @@ export default function Calculate({ navigation }: Props) {
       <Text style={styles.title}>How much do you consume? (in calories)? </Text>
       <Paragraph>Meat, fish, eggs</Paragraph>
       <Slider style={styles.slider} value={0} onValueChange={clickHandler1} minimumValue={0} maximumValue={5} step={1} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
-      <Chip style={styles.chip} onPress={() => console.log('Pressed')}>{value1} Daily calories per person</Chip>
+      <Chip style={styles.chip}>{value1} Daily calories per person | Avg 576 cal/person</Chip>
       <Paragraph>Diary</Paragraph>
       <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler2} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
-      <Chip style={styles.chip} onPress={() => console.log('Pressed')}>{value2} Daily calories per person</Chip>
+      <Chip style={styles.chip}>{value2} Daily calories per person | Avg 671 cal/person</Chip>
       <Paragraph>Grains/Cereals</Paragraph>
       <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler3} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
-      <Chip style={styles.chip} onPress={() => console.log('Pressed')}>{value3} Daily calories per person</Chip>
+      <Chip style={styles.chip}>{value3} Daily calories per person | Avg 286 cal/person</Chip>
       <Paragraph>Fruits/Vegetables</Paragraph>
       <Slider style={styles.slider} step={1} value={0} onValueChange={clickHandler4} minimumValue={0} maximumValue={5} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" />
-      <Chip style={styles.chip} onPress={() => console.log('Pressed')}>{value4} Daily calories per person</Chip>
+      <Chip style={styles.chip}>{value4} Daily calories per person | Avg 271 cal/person</Chip>
       <Button mode="contained" onPress={() => navigation.navigate('CalculateFinanceScreen')}>
         Next
       </Button>
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   chip: {
-    width: 220,
+    width: 340,
     backgroundColor: 'lightblue',
     textAlign: 'center',
     marginBottom: 10
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
   },
   slider: {
     opacity: 1,
-    width: 400,
     height: 50,
     marginTop: 10,
   },
