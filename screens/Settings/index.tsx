@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
-import { Divider, List } from 'react-native-paper'
+import { List, MD3Colors } from 'react-native-paper'
 import { useAppDispatch } from '../../hooks'
 import { reset } from '../../redux/meditationSlice'
 import { openURL } from '../../utils'
@@ -39,12 +39,19 @@ const Settings = ({ navigation }: Props) => {
   }
   return (
     <>
-      <List.Item title="Clear Data" onPress={clearData} />
-      <Divider />
-      <List.Item title="Privacy Policy" onPress={openPrivacyPolicy} />
-      <Divider />
-      <List.Item title="About" onPress={() => navigation.navigate('AboutScreen')} />
-      <Divider />
+      <List.Section>
+      <List.Subheader>My Pledges</List.Subheader>
+      <List.Item title="Carry a reusable bag while I step out" left={() => <List.Icon icon="check" />} />
+      <List.Item
+        title="Carry my own reusable cup for coffee/tea in restaurants"
+        left={() => <List.Icon  icon="check" />}
+      />
+      <List.Item
+        title="Make conscious effort in buying organic fibres (clothing/accessories)"
+        left={() => <List.Icon  icon="check" />}
+      />
+      
+    </List.Section>
     </>
   )
 }
