@@ -29,18 +29,19 @@ const chartConfig = {
 
 export default function StatsScreen({ navigation }: Props) {
   const textColor = useThemeColor({}, 'text')
-  const [results, setResults] = useState<Array>([]);
+  const [results, setResults] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   const getTrackHistory = () => {
+    // console.log(results)
     axios.get("https://spft02h3ui.execute-api.ap-southeast-2.amazonaws.com/emissions")
             .then(response => response.data.Items)
             .then(data => {
               data.forEach(element => {
-                setResults(prevState => [...prevState, element.emissions]);
-              });
-              cosole.log('emissions', results)
-            })
-            .catch(error => console.log(error));
+                setResults(results => [...results, element.emission]);
+                setLabels(labels => [...labels, element.category]);
+              })
+            });
   }
   useEffect(() => {
     getTrackHistory()
@@ -54,7 +55,7 @@ export default function StatsScreen({ navigation }: Props) {
             <View style={styles.chartContainer}>
                 <BarChart
                     data={{
-                    labels: ['Travel', 'Personal', 'Food'],
+                    labels: labels,
                     datasets: [
                         {
                         data: results,
