@@ -39,7 +39,7 @@ export default function Results({ navigation }: Props) {
             <View style={styles.chartContainer}>
                 <BarChart
                     data={{
-                    labels: ['Travel', 'Home', 'Food'],
+                    labels: ['Travel', 'Personal', 'Food'],
                     datasets: [
                         {
                         data: [70, 49, 55],
