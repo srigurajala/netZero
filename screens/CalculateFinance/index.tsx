@@ -41,7 +41,7 @@ export default function CalculateFinance({ navigation }: Props) {
       {/* <Text style={styles.title}>How much do you spend on the below (AUD/Year) ?</Text> */}
       {/* <Text variant="bodyMedium">Pharmaceuticals</Text>
       <Slider value={0} onValueChange={setValue} minimumValue={0} maximumValue={} minimumTrackTintColor="#FFFFFF" maximumTrackTintColor="#000000" /> */}
-      <Button mode="contained" onPress={() => navigation.navigate('CalculateFinanceScreen')}>
+      <Button mode="contained" onPress={() => navigation.navigate('ResultsScreen')}>
         Submit
       </Button>
     </Screen>

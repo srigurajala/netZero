@@ -31,6 +31,10 @@ export type CalculateFinanceParamList = {
   CalculateFinanceScreen: NO_PARAMS
 }
 
+export type ResultsParamList = {
+  ResultsScreen: NO_PARAMS
+}
+
 export type StatsParamList = {
   StatsScreen: NO_PARAMS
 }
